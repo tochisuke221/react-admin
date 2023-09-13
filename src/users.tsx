@@ -1,4 +1,4 @@
-import { List, SimpleList, Datagrid, TextField, EmailField, UrlField } from "react-admin";
+import { List, SimpleList, Datagrid, TextField, EmailField, UrlField, EditButton } from "react-admin";
 import { useMediaQuery, Theme } from "@mui/material";
 import MyUrlField from './MyUrlField';
 
@@ -42,7 +42,7 @@ export const UserList = () => {
                     tertiaryText={(record) => record.email}
                 />
               ) : (
-                <Datagrid rowClick="edit">
+                <Datagrid rowClick="show">
                     <TextField source="id" />
                     <TextField source="name" />
                     {/* <TextField source="username" /> */}
@@ -52,6 +52,7 @@ export const UserList = () => {
                     <UrlField source="website" />
                     <MyUrlField source="website" />
                     <TextField source="company.name" />
+                    <EditButton />
                 </Datagrid>
               )
           }
