@@ -1,26 +1,36 @@
-// import {
-//   Admin,
-//   Resource,
-//   // ListGuesser,
-//   // EditGuesser,
-//   // ShowGuesser,
-// } from "react-admin";
-import { Admin, Resource, ShowGuesser } from "react-admin";
-import { dataProvider } from "./dataProvider";
-import { authProvider } from "./authProvider";
-import { UserList, UserShow } from "./users"
-import { PostList, PostEdit, PostCreate } from "./posts"
+import { Admin, Resource, ShowGuesser } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
+import PostIcon from '@mui/icons-material/Book';
+import UserIcon from '@mui/icons-material/Group';
 
-export const App = () => (
-  <Admin dataProvider={dataProvider} authProvider={authProvider}>
-    {/* <Resource name="users" list={UserList} recordRepresentation="name" /> */}
-    <Resource name="users" list={UserList} show={UserShow} recordRepresentation="name" />
-    <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} />
-    {/* <Resource
-      name="comments"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
-    /> */}
-  </Admin>
+import { PostList, PostEdit, PostCreate } from './posts';
+import { UserList } from './users';
+import { Dashboard } from './Dashboard';
+import { authProvider } from './authProvider';
+
+const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+
+const App = () => (
+    <Admin
+        authProvider={authProvider}
+        dataProvider={dataProvider}
+        dashboard={Dashboard}
+    >
+        <Resource
+            name="posts"
+            list={PostList}
+            edit={PostEdit}
+            create={PostCreate}
+            icon={PostIcon}
+        />
+        <Resource
+            name="users"
+            list={UserList}
+            show={ShowGuesser}
+            icon={UserIcon}
+            recordRepresentation="name"
+        />
+    </Admin>
 );
+
+export default App;
